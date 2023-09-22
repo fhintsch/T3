@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Dp2Lib.Models"
+             xmlns:ViewModels="clr-namespace:Dp2Client.ViewModels"
+             xmlns:xxx="clr-namespace:T3.ViewModels"
+             x:Name="Root"
+             x:Class="T3.MainPage">
+    <ContentPage.BindingContext>
+        <ViewModels:SearchViewModel/>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout
+            Spacing="25"
+            Padding="30"
+            VerticalOptions="Center">
+        <Entry Placeholder="Suche" Text="{Binding SearchPattern}" />
+        <CollectionView ItemsSource="{Binding ResultSet}" IsGrouped="true">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button Text="{Binding Ident}" BackgroundColor="LightGray" TextColor="Black" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="model:ReferenceGroup">
+                    <Label Text="{Binding Name}" BackgroundColor="Transparent" FontSize="Medium" FontAttributes="Bold" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.EmptyView>
+                <ContentView>
+                    <Label Text="Nichts gefunden."
+                                       Margin="10,25,10,10"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       HorizontalOptions="Fill"
+                                       HorizontalTextAlignment="Center" />
+                </ContentView>
+            </CollectionView.EmptyView>
+        </CollectionView>
+        <ListView ItemsSource="{Binding ResultSet}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Button Text="{Binding Ident}" BackgroundColor="LightGray" TextColor="Black"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
+
